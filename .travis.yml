@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run -e CI=true ayucawa/react-ci npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "react-ci"
+  env: "Reactci-env"
+  bucket_name: "elasticbeanstalk-us-east-2-644221692013"
+  bucket_path: "react-ci"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+      secure: "$AWS_SECRET_KEY"
